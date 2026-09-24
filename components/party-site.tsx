@@ -2,12 +2,20 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Check, ChevronDown, Menu, MessageCircle, Sparkles, X } from 'lucide-react'
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Check, ChevronDown, Menu, MessageCircle, Quote, Sparkles, X } from 'lucide-react'
 import { categoryLabel, items, translations, whatsappUrl, type Locale, type PartyItem } from '@/lib/content'
 
 const localeNames: Record<Locale, string> = { pt: 'PT', es: 'ES', en: 'EN' }
 const logoImage = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-QXVQaseytHvQ7w9G0EiiMHF9oI5Twh.png'
 const handmadeImage = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-a0Zs4wWUtsL7upenSLOJs5XJKPNOXk.png'
+
+const testimonials = [
+  { quote: 'Everything looked beautiful and exactly how we imagined it. The balloon decorations made the whole party feel so special. Highly recommend Donali Party!', author: 'Maria S.', location: 'Lowell, MA' },
+  { quote: 'Donali Party did an amazing job with our decorations! Everything was beautiful, well organized, and the setup was perfect. We loved how everything turned out.', author: 'Jessica R.', location: 'Lowell, MA' },
+  { quote: 'I was so happy with how everything came together. The balloons and decorations were beautiful, and they really made the celebration feel complete. Thank you!', author: 'Amanda C.', location: 'Dracut, MA' },
+  { quote: 'The decorations were absolutely beautiful! Donali Party understood exactly what we wanted and made everything look even better than we expected. We received so many compliments.', author: 'Carolina M.', location: 'Chelmsford, MA' },
+  { quote: 'Great service from beginning to end. The decorations looked amazing, everything was set up beautifully, and it made our celebration even more memorable.', author: 'Sofia L.', location: 'Lowell, MA' },
+]
 
 export function PartySite() {
   const [locale, setLocale] = useState<Locale>('pt')
@@ -69,6 +77,8 @@ export function PartySite() {
       <section id="how" className="reveal bg-[#3d3145] px-5 py-20 text-white lg:px-10 lg:py-28"><div className="mx-auto max-w-7xl"><p className="eyebrow text-[#f8cf55]">{t.how.eyebrow}</p><h2 className="section-title text-white">{t.how.title}</h2><div className="mt-12 grid gap-10 md:grid-cols-3">{t.how.steps.map((step, index) => <div key={step.title} style={{ transitionDelay: `${index * 140}ms` }} className="reveal how-step relative border-t border-white/20 pt-5"><span className="font-display text-5xl font-bold text-[#f8cf55]">0{index + 1}</span><h3 className="font-display mt-8 text-2xl font-bold">{step.title}</h3><p className="mt-3 max-w-xs leading-relaxed text-white/60">{step.body}</p></div>)}</div></div></section>
 
       <section id="about" className="grid gap-10 px-5 py-20 lg:grid-cols-2 lg:gap-20 lg:px-10 lg:py-28"><div className="mx-auto w-full max-w-xl overflow-hidden rounded-[2.5rem] bg-[#bde3d7]"><Image src={items[4].image} alt={items[4].name[locale]} width={650} height={650} className="aspect-square w-full object-cover" /></div><div className="flex max-w-xl flex-col justify-center"><p className="eyebrow">{t.about.eyebrow}</p><h2 className="section-title">{t.about.title}</h2><p className="mt-7 text-lg leading-relaxed text-[#3d3145]/70">{t.about.body}</p><p className="mt-8 font-display text-xl font-bold text-[#e85d7b]">{t.about.signature}</p></div></section>
+
+      <section id="testimonials" className="reveal bg-[#bde3d7] px-5 py-20 lg:px-10 lg:py-28"><div className="mx-auto max-w-7xl"><p className="eyebrow">{t.testimonials.eyebrow}</p><h2 className="section-title">{t.testimonials.title}</h2><div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{testimonials.map((testimonial, index) => <article key={testimonial.author} className={`reveal flex flex-col justify-between rounded-3xl bg-white p-7 shadow-sm ${index === testimonials.length - 1 ? 'md:col-span-2 lg:col-span-1' : ''}`}><div><Quote className="text-[#e85d7b]" size={30} aria-hidden="true" /><p className="mt-5 text-lg leading-relaxed text-[#3d3145]/80">&ldquo;{testimonial.quote}&rdquo;</p></div><footer className="mt-7 border-t border-[#3d3145]/10 pt-4"><p className="font-bold">{testimonial.author}</p><p className="text-sm text-[#3d3145]/55">{testimonial.location}</p></footer></article>)}</div></div></section>
 
       <section id="faq" className="reveal bg-[#f8cf55] px-5 py-20 lg:px-10 lg:py-28"><div className="mx-auto max-w-4xl"><p className="eyebrow">{t.faq.eyebrow}</p><h2 className="section-title">{t.faq.title}</h2><div className="mt-10 flex flex-col gap-3">{t.faq.questions.map((question) => <details key={question.q} className="reveal group rounded-2xl bg-white px-6 py-5"><summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-bold">{question.q}<ChevronDown className="transition group-open:rotate-180" /></summary><p className="mt-4 max-w-2xl leading-relaxed text-[#3d3145]/70">{question.a}</p></details>)}</div></div></section>
 
